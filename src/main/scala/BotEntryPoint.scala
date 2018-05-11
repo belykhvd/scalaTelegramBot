@@ -11,27 +11,24 @@ object BotEntryPoint extends TelegramBot with Polling with Commands {
 
   onCommand('create_poll) {
     implicit msg => withArgs { args =>
-      reply(botEngine.create_poll(restoreArgString(args), msg.from.get.id))
+      reply(botEngine.createPoll(restoreArgString(args), msg.from.get.id))
     }}
 
   onCommand('delete_poll) {
     implicit msg => withArgs { args =>
-      reply(botEngine.delete_poll(restoreArgString(args), msg.from.get.id))
+      reply(botEngine.deletePoll(restoreArgString(args), msg.from.get.id))
     }}
 
-  onCommand('list) {
-    implicit msg => withArgs { args =>
-      reply(botEngine.list(msg.from.get.id))
-    }}
+  onCommand('list) { implicit msg => reply(botEngine.list(msg.from.get.id)) }
 
   onCommand('start_poll) {
     implicit msg => withArgs { args =>
-      reply(botEngine.start_poll(restoreArgString(args), msg.from.get.id))
+      reply(botEngine.startPoll(restoreArgString(args), msg.from.get.id))
     }}
 
   onCommand('stop_poll) {
     implicit msg => withArgs { args =>
-      reply(botEngine.stop_poll(restoreArgString(args), msg.from.get.id))
+      reply(botEngine.stopPoll(restoreArgString(args), msg.from.get.id))
     }}
 
   onCommand('result) {
@@ -46,12 +43,12 @@ object BotEntryPoint extends TelegramBot with Polling with Commands {
 
   onCommand('add_question) {
     implicit msg => withArgs { args =>
-      reply(botEngine.add_question(restoreArgString(args), msg.from.get.id))
+      reply(botEngine.addQuestion(restoreArgString(args), msg.from.get.id))
     }}
 
   onCommand('delete_question) {
     implicit msg => withArgs { args =>
-      reply(botEngine.delete_question(restoreArgString(args), msg.from.get.id))
+      reply(botEngine.deleteQuestion(restoreArgString(args), msg.from.get.id))
     }}
 
   onCommand('answer) {
@@ -60,14 +57,12 @@ object BotEntryPoint extends TelegramBot with Polling with Commands {
     }}
 
   onCommand('view) {
-    implicit msg => withArgs { args =>
-      reply(botEngine.view(msg.from.get.id))
-    }}
+    implicit msg => reply(botEngine.view(msg.from.get.id))
+  }
 
   onCommand('end) {
-    implicit msg => withArgs { args =>
-      reply(botEngine.end(msg.from.get.id))
-    }}
+    implicit msg => reply(botEngine.end(msg.from.get.id))
+  }
 
   private def restoreArgString(seq: Seq[String]): String = seq.mkString(" ")
 }

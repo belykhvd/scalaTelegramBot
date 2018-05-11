@@ -1,5 +1,0 @@
-package PollDeps
-
-class ErrorConstants {
-
-}
